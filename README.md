@@ -1,2 +1,2 @@
-# rubenportz-gmail.com
-rails
+# Ruby, Rails & JS Tutorials
+
