@@ -40,7 +40,7 @@ loop do
 
   #hortizontal check
   for z in 0..2 do
-    if grid[y][z] != a 
+    if grid[y][z] != a
       break
     end
     if z == 2
@@ -55,6 +55,7 @@ loop do
       break
     end
     if z == 2
+      puts " "
       print "Player #{a} is the winner"
     end
   end
@@ -65,6 +66,7 @@ loop do
       break
     end
     if z == 2
+      puts " "
       print "Player #{a} is the winner"
     end
   end
@@ -75,6 +77,7 @@ loop do
       break
     end
     if z == 2
+      puts " "
       print "Player #{a} is the winner"
     end
   end
