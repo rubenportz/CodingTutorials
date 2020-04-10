@@ -4,6 +4,7 @@ grid = Array.new(3) {Array.new(3, "_")}
 # is it player O's turn?
 naughts = true
 
+
 # game will loop until someone wins or player exits
 loop do
 
@@ -31,6 +32,7 @@ loop do
   x = x.to_i
   y = y.to_i
 
+
   abort "Wrong move" unless grid[x][y] = "_"
   # todo: update grid
   grid[y][x] = a
@@ -46,6 +48,7 @@ loop do
     if z == 2
       puts " "
       puts "Player #{a} is the winner"
+      winner = true
     end
   end
 
@@ -57,6 +60,7 @@ loop do
     if z == 2
       puts " "
       print "Player #{a} is the winner"
+      winner = true
     end
   end
 
@@ -68,6 +72,7 @@ loop do
     if z == 2
       puts " "
       print "Player #{a} is the winner"
+      winner = true
     end
   end
 
@@ -79,7 +84,12 @@ loop do
     if z == 2
       puts " "
       print "Player #{a} is the winner"
+      winner = true
     end
+  end
+
+  if winner == true
+    break
   end
 
   # swap player turn
