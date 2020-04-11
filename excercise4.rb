@@ -43,12 +43,16 @@ loop do
     # todo: update grid
     grid[y][x] = a
     # todo: draw grid
-    for y in 0..2 do
-      for x in 0..2 do
-        print grid[y][x]
-      end
-      puts " "
-    end
+    print grid
+
+    # if I display the grid as below, then the check rules don't work. Not sure yet why?!
+    # for y in 0..2 do
+    #   for x in 0..2 do
+    #     print grid[y][x]
+    #   end
+    #   puts " "
+    # end
+
     # todo: check for winner and break the loop
     #hortizontal check
     for z in 0..2 do
@@ -74,7 +78,7 @@ loop do
       end
     end
 
-    # #cross check
+    #cross check
     for z in 0..2 do
       if grid[z][z] != a
         break
@@ -86,7 +90,7 @@ loop do
       end
     end
 
-    # #anti-cross check
+    #anti-cross check
     for z in 0..2 do
       if grid[z][(z-2).abs] != a
         break
