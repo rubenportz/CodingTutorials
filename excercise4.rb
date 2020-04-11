@@ -34,6 +34,7 @@ loop do
   x = input[0]
   y = input[1]
 
+  # check for correct input
   if x.to_i.to_s == x && y.to_i.to_s == y
     x = x.to_i
     y = y.to_i
