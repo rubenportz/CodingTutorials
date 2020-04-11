@@ -10,12 +10,14 @@ loop do
 
   if naughts
     puts " "
-    puts "Player O's turn. Turn #{i}"
+    puts "Player O's turn."
+    puts "Turn #{i}"
     a = "O"
 	  i = i + 1
   else
     puts " "
-    puts "Player X's turn. Turn #{j}"
+    puts "Player X's turn."
+    puts "Turn #{i}"
     a = "X"
     j = j + 1
   end
@@ -41,7 +43,12 @@ loop do
     # todo: update grid
     grid[y][x] = a
     # todo: draw grid
-    print grid
+    for y in 0..2 do
+      for x in 0..2 do
+        print grid[y][x]
+      end
+      puts " "
+    end
     # todo: check for winner and break the loop
     #hortizontal check
     for z in 0..2 do
@@ -93,7 +100,8 @@ loop do
 
     #ask for restart in winner scenario
     if winner == true
-      puts "Do you want to restart"
+      puts " "
+      puts "Do you want to restart?"
       puts "Enter y to restart, q to quit: "
       input = gets.chomp
       i = 1
@@ -114,7 +122,7 @@ loop do
         elsif grid[y][x] != "_" && y == 2 && x == 2
           puts " "
           puts "There's no winner"
-          puts "Do you want to restart"
+          puts "Do you want to restart?"
           puts "Enter y to restart, q to quit: "
           input = gets.chomp
           i = 1
