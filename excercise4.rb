@@ -43,15 +43,15 @@ loop do
     # todo: update grid
     grid[y][x] = a
     # todo: draw grid
-    print grid
+    # print grid
 
     # if I display the grid as below, then the check rules don't work. Not sure yet why?!
-    # for y in 0..2 do
-    #   for x in 0..2 do
-    #     print grid[y][x]
-    #   end
-    #   puts " "
-    # end
+    for y in 0..2 do
+      for x in 0..2 do
+        print grid[y][x]
+      end
+      puts " "
+    end
 
     # todo: check for winner and break the loop
     #hortizontal check
@@ -115,6 +115,7 @@ loop do
       end
       if input == "y"
         grid = Array.new(3) {Array.new(3, "_")}
+        winner = false
       end
     end
 
@@ -136,6 +137,7 @@ loop do
           end
           if input == "y"
             grid = Array.new(3) {Array.new(3, "_")}
+            winner = false
           end
         end
       end
