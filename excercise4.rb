@@ -17,7 +17,7 @@ loop do
   else
     puts " "
     puts "Player X's turn."
-    puts "Turn #{i}"
+    puts "Turn #{j}"
     a = "X"
     j = j + 1
   end
@@ -47,9 +47,9 @@ loop do
     # print grid
 
     # if I display the grid as below, then the check rules don't work. Not sure yet why?!
-    for y in 0..2 do
-      for x in 0..2 do
-        print grid[y][x]
+    for w in 0..2 do
+      for v in 0..2 do
+        print grid[w][v]
       end
       puts " "
     end
