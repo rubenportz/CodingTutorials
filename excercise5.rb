@@ -1,3 +1,5 @@
+require 'io/console'
+
 level = 1
 # Ask for grid size
 puts "Enter width and length (e.g 10 20)"
@@ -16,7 +18,7 @@ if a.to_i.to_s == a && b.to_i.to_s == b
   c = (a * b) * 0.2
 
   loop do
-    # Create grid
+    # Create gridrub
     grid = Array.new(a) { Array.new(b, " ") }
 
     # Push "#" into grid
@@ -68,9 +70,13 @@ if a.to_i.to_s == a && b.to_i.to_s == b
 
     loop do
       puts "Move your player: A W S D"
-      movePlayer = gets.chomp
+      movePlayer = STDIN.getch.downcase
 
-      if movePlayer == "A"
+      if movePlayer == "q"
+        exit 0
+      end
+
+      if movePlayer == "a"
         if grid[d][(e - 1)] == "#"
           power = power - 5
           system "clear"
@@ -90,7 +96,7 @@ if a.to_i.to_s == a && b.to_i.to_s == b
           grid[d][e] = "O"
           system "clear"
         end
-      elsif movePlayer == "D"
+      elsif movePlayer == "d"
         if grid[d][(e + 1)] == "#"
           power = power - 5
           system "clear"
@@ -110,7 +116,7 @@ if a.to_i.to_s == a && b.to_i.to_s == b
           grid[d][e] = "O"
           system "clear"
         end
-      elsif movePlayer == "S"
+      elsif movePlayer == "s"
         if grid[(d + 1)][e] == "#"
           power = power - 5
           system "clear"
@@ -130,7 +136,7 @@ if a.to_i.to_s == a && b.to_i.to_s == b
           grid[d][e] = "O"
           system "clear"
         end
-      elsif movePlayer == "W"
+      elsif movePlayer == "w"
         if grid[(d - 1)][e] == "#"
           power = power - 5
           system "clear"
