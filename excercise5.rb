@@ -1,5 +1,43 @@
 require 'io/console'
 
+class Player
+
+  # x y position in the maze
+  attr_accessor :x, :y
+
+  attr_accessor :health
+
+  attr_accessor :power
+
+  attr_reader :char
+
+  def initialize(x, y)
+    @char = "O"
+
+    @health = 0
+    @power = 0
+
+    @x = x
+    @y = y
+  end
+
+  def move(x, y)
+
+  end
+
+end
+
+p1 = nil
+
+
+thisisastring = "alass Player
+
+def initialize(x, y)
+  @
+end
+
+endsdasda"
+
 level = 1
 # Ask for grid size
 puts "Enter width and length (e.g 10 20)"
@@ -37,8 +75,6 @@ if a.to_i.to_s == a && b.to_i.to_s == b
     end
 
     # Place "O" & "W" at random start position
-    d = rand(1..(a - 2))
-    e = rand(1..(b - 2))
     f = rand(1..(a - 2))
     g = rand(1..(b - 2))
     h = rand(1..(a - 2))
@@ -49,7 +85,13 @@ if a.to_i.to_s == a && b.to_i.to_s == b
     m = rand(1..(b - 2))
     n = rand(1..(a - 2))
     o = rand(1..(b - 2))
+
+    d = rand(1..(a - 2))
+    e = rand(1..(b - 2))
+
     grid[d][e] = "O"
+    p1 = Player.new(d, e)
+
     grid[f][g] = "W"
     grid[h][i] = "T"
     grid[j][k] = "T"
@@ -70,6 +112,8 @@ if a.to_i.to_s == a && b.to_i.to_s == b
 
     loop do
       puts "Move your player: A W S D"
+      puts p1.x, p1.y
+
       movePlayer = STDIN.getch.downcase
 
       if movePlayer == "q"
@@ -94,6 +138,8 @@ if a.to_i.to_s == a && b.to_i.to_s == b
           grid[d][e] = " "
           e = e - 1
           grid[d][e] = "O"
+          p1.x = d
+          p1.y = e
           system "clear"
         end
       elsif movePlayer == "d"
@@ -183,6 +229,8 @@ if a.to_i.to_s == a && b.to_i.to_s == b
         puts "Enemy health is #{health}"
         puts "Level #{level}"
         puts "Your power is #{power}"
+        puts p1.x, p1.y
+
         break
       else
         puts "Enemy health is #{health}"
