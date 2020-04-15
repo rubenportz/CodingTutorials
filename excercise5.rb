@@ -17,36 +17,36 @@ if a.to_i.to_s == a && b.to_i.to_s == b
 
   loop do
     # Create grid
-    grid = Array.new(a) {Array.new(b, " ")}
+    grid = Array.new(a) { Array.new(b, " ") }
 
     # Push "#" into grid
-    for x in 1..c do
-      grid[rand(1..(a-2))][rand(1..(b-2))] = "#"
+    for x in 1..c
+      grid[rand(1..(a - 2))][rand(1..(b - 2))] = "#"
     end
 
     # Push edges into grid
-    for w in 0..(a-1) do
-      for v in 0..(b-1) do
+    for w in 0..(a - 1)
+      for v in 0..(b - 1)
         grid[0][v] = "#"
-        grid[a-1][v] = "#"
+        grid[a - 1][v] = "#"
         grid[w][0] = "#"
-        grid[w][b-1] = "#"
+        grid[w][b - 1] = "#"
       end
     end
 
     # Place "O" & "W" at random start position
-    d = rand(1..(a-2))
-    e = rand(1..(b-2))
-    f = rand(1..(a-2))
-    g = rand(1..(b-2))
-    h = rand(1..(a-2))
-    i = rand(1..(b-2))
-    j = rand(1..(a-2))
-    k = rand(1..(b-2))
-    l = rand(1..(a-2))
-    m = rand(1..(b-2))
-    n = rand(1..(a-2))
-    o = rand(1..(b-2))
+    d = rand(1..(a - 2))
+    e = rand(1..(b - 2))
+    f = rand(1..(a - 2))
+    g = rand(1..(b - 2))
+    h = rand(1..(a - 2))
+    i = rand(1..(b - 2))
+    j = rand(1..(a - 2))
+    k = rand(1..(b - 2))
+    l = rand(1..(a - 2))
+    m = rand(1..(b - 2))
+    n = rand(1..(a - 2))
+    o = rand(1..(b - 2))
     grid[d][e] = "O"
     grid[f][g] = "W"
     grid[h][i] = "T"
@@ -58,16 +58,18 @@ if a.to_i.to_s == a && b.to_i.to_s == b
     health = 100
 
     # Print grid
-    for w in 0..(a-1) do
-      for v in 0..(b-1) do
+    for w in 0..(a - 1)
+      for v in 0..(b - 1)
         print grid[w][v]
       end
+
       puts " "
     end
 
     loop do
       puts "Move your player: A W S D"
       movePlayer = gets.chomp
+
       if movePlayer == "A"
         if grid[d][(e - 1)] == "#"
           power = power - 5
@@ -77,10 +79,12 @@ if a.to_i.to_s == a && b.to_i.to_s == b
           if grid[d][(e - 1)] == "T"
             power = power + 10
           end
+
           if grid[d][(e - 1)] == "W"
             health = health - power
-            grid[rand(1..(a-2))][rand(1..(b-2))] = "W"
+            grid[rand(1..(a - 2))][rand(1..(b - 2))] = "W"
           end
+
           grid[d][e] = " "
           e = e - 1
           grid[d][e] = "O"
@@ -95,10 +99,12 @@ if a.to_i.to_s == a && b.to_i.to_s == b
           if grid[d][(e + 1)] == "T"
             power = power + 10
           end
+
           if grid[d][(e + 1)] == "W"
             health = health - power
-            grid[rand(1..(a-2))][rand(1..(b-2))] = "W"
+            grid[rand(1..(a - 2))][rand(1..(b - 2))] = "W"
           end
+
           grid[d][e] = " "
           e = e + 1
           grid[d][e] = "O"
@@ -113,10 +119,12 @@ if a.to_i.to_s == a && b.to_i.to_s == b
           if grid[(d + 1)][e] == "T"
             power = power + 10
           end
+
           if grid[(d + 1)][e] == "W"
             health = health - power
-            grid[rand(1..(a-2))][rand(1..(b-2))] = "W"
+            grid[rand(1..(a - 2))][rand(1..(b - 2))] = "W"
           end
+
           grid[d][e] = " "
           d = d + 1
           grid[d][e] = "O"
@@ -131,10 +139,12 @@ if a.to_i.to_s == a && b.to_i.to_s == b
           if grid[(d - 1)][e] == "T"
             power = power + 10
           end
+
           if grid[(d - 1)][e] == "W"
             health = health - power
-            grid[rand(1..(a-2))][rand(1..(b-2))] = "W"
+            grid[rand(1..(a - 2))][rand(1..(b - 2))] = "W"
           end
+
           grid[d][e] = " "
           d = d - 1
           grid[d][e] = "O"
@@ -146,14 +156,17 @@ if a.to_i.to_s == a && b.to_i.to_s == b
       end
 
       # Print grid
-      for w in 0..(a-1) do
-        for v in 0..(b-1) do
+      for w in 0..(a - 1)
+        for v in 0..(b - 1)
           print grid[w][v]
         end
+
         puts ""
       end
+
       puts "Level #{level}"
       puts "Your power is #{power}"
+
       if health <= 0
         system "clear"
         level = level + 1
@@ -170,7 +183,6 @@ if a.to_i.to_s == a && b.to_i.to_s == b
       end
     end
   end
-
 else
   puts "Wrong input."
 end
