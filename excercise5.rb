@@ -5,111 +5,139 @@ class Player
   # x y position in the maze
   attr_accessor :x, :y
 
+  attr_reader :char
+
   attr_accessor :health
 
   attr_accessor :power
 
-  attr_reader :char
-
   def initialize(x, y)
-    @char = "O"
-
-    @health = 0
-    @power = 0
-
     @x = x
     @y = y
+
+    @char = "O"
+
+    @power = 0
   end
 
-  def move(x, y)
-
+  def move(vertical, horizontal)
+    # @char = " "
+    @x = x + horizontal
+    @y = y + vertical
+    # @char = "O"
+    # system "clear"
   end
 
 end
 
-p1 = nil
 
+class Weapon
 
-thisisastring = "alass Player
+  # x y position in the maze
+  attr_accessor :x, :y
 
-def initialize(x, y)
-  @
+  attr_reader :char
+
+  attr_accessor :power
+
+  def initialize(x, y)
+    @x = x
+    @y = y
+
+    @char = "T"
+
+    @power = 20
+  end
+
 end
 
-endsdasda"
+class Enemy
 
+  # x y position in the maze
+  attr_accessor :x, :y
+
+  attr_reader :char
+
+  attr_accessor :health
+
+  def initialize(x, y)
+    @x = x
+    @y = y
+
+    @char = "W"
+
+    @health = 100
+  end
+
+end
+
+
+# Set starting level of game
 level = 1
+
 # Ask for grid size
 puts "Enter width and length (e.g 10 20)"
 input = gets.chomp
 
 input = input.split " "
-a = input[0]
-b = input[1]
+width = input[0]
+height = input[1]
 
 # check for correct input
-if a.to_i.to_s == a && b.to_i.to_s == b
-  a = a.to_i
-  b = b.to_i
+if width.to_i.to_s == width && height.to_i.to_s == height
+  width = width.to_i
+  height = height.to_i
 
-  # What part of the grid to cover with "#"
-  c = (a * b) * 0.2
+  # What % of the grid to cover with "#"
+  c = (width * height) * 0.2
 
   loop do
-    # Create gridrub
-    grid = Array.new(a) { Array.new(b, " ") }
+    # Create empty grid
+    grid = Array.new(width) { Array.new(height, " ") }
 
     # Push "#" into grid
     for x in 1..c
-      grid[rand(1..(a - 2))][rand(1..(b - 2))] = "#"
+      grid[rand(1..(width - 2))][rand(1..(height - 2))] = "#"
     end
 
     # Push edges into grid
-    for w in 0..(a - 1)
-      for v in 0..(b - 1)
+    for w in 0..(width - 1)
+      for v in 0..(height - 1)
         grid[0][v] = "#"
-        grid[a - 1][v] = "#"
+        grid[width - 1][v] = "#"
         grid[w][0] = "#"
-        grid[w][b - 1] = "#"
+        grid[w][height - 1] = "#"
       end
     end
 
-    # Place "O" & "W" at random start position
-    f = rand(1..(a - 2))
-    g = rand(1..(b - 2))
-    h = rand(1..(a - 2))
-    i = rand(1..(b - 2))
-    j = rand(1..(a - 2))
-    k = rand(1..(b - 2))
-    l = rand(1..(a - 2))
-    m = rand(1..(b - 2))
-    n = rand(1..(a - 2))
-    o = rand(1..(b - 2))
+    # Create random position coordinates for weapon, player & enemy
+    positionX = ((1...(width-2)).sort_by{rand})[0..5]
+    positionY = ((1...(height-2)).sort_by{rand})[0..5]
 
-    d = rand(1..(a - 2))
-    e = rand(1..(b - 2))
+    # Create 1 Enemy
+    e1 = Enemy.new(positionX[0], positionY[0])
+    grid[e1.x][e1.y] = e1.char
 
-    grid[d][e] = "O"
-    p1 = Player.new(d, e)
+    # Create 1 Player
+    p1 = Player.new(positionX[1], positionY[1])
+    grid[p1.x][p1.y] = p1.char
 
-    grid[f][g] = "W"
-    grid[h][i] = "T"
-    grid[j][k] = "T"
-    grid[l][m] = "T"
-    grid[n][o] = "T"
-
-    power = 0
-    health = 100
+    # Create 4 Weapons
+    for z in 2..5 do
+      tz = Weapon.new(positionX[z], positionY[z])
+      grid[tz.x][tz.y] = tz.char
+    end
 
     # Print grid
-    for w in 0..(a - 1)
-      for v in 0..(b - 1)
+    for w in 0..(width - 1)
+      for v in 0..(height - 1)
         print grid[w][v]
       end
 
       puts " "
     end
 
+    # Loop after player's interaction
     loop do
       puts "Move your player: A W S D"
       puts p1.x, p1.y
@@ -118,98 +146,48 @@ if a.to_i.to_s == a && b.to_i.to_s == b
 
       if movePlayer == "q"
         exit 0
-      end
 
-      if movePlayer == "a"
-        if grid[d][(e - 1)] == "#"
-          power = power - 5
-          system "clear"
-          puts "Hitting border"
-        else
-          if grid[d][(e - 1)] == "T"
-            power = power + 10
-          end
-
-          if grid[d][(e - 1)] == "W"
-            health = health - power
-            grid[rand(1..(a - 2))][rand(1..(b - 2))] = "W"
-          end
-
-          grid[d][e] = " "
-          e = e - 1
-          grid[d][e] = "O"
-          p1.x = d
-          p1.y = e
-          system "clear"
-        end
-      elsif movePlayer == "d"
-        if grid[d][(e + 1)] == "#"
-          power = power - 5
-          system "clear"
-          puts "Hitting border"
-        else
-          if grid[d][(e + 1)] == "T"
-            power = power + 10
-          end
-
-          if grid[d][(e + 1)] == "W"
-            health = health - power
-            grid[rand(1..(a - 2))][rand(1..(b - 2))] = "W"
-          end
-
-          grid[d][e] = " "
-          e = e + 1
-          grid[d][e] = "O"
-          system "clear"
-        end
-      elsif movePlayer == "s"
-        if grid[(d + 1)][e] == "#"
-          power = power - 5
-          system "clear"
-          puts "Hitting border"
-        else
-          if grid[(d + 1)][e] == "T"
-            power = power + 10
-          end
-
-          if grid[(d + 1)][e] == "W"
-            health = health - power
-            grid[rand(1..(a - 2))][rand(1..(b - 2))] = "W"
-          end
-
-          grid[d][e] = " "
-          d = d + 1
-          grid[d][e] = "O"
-          system "clear"
-        end
+      # Going Up
       elsif movePlayer == "w"
-        if grid[(d - 1)][e] == "#"
-          power = power - 5
+
+        if grid[(p1.y - 1)][p1.x] == "#"
+          p1.power = p1.power - 5
           system "clear"
           puts "Hitting border"
+
         else
-          if grid[(d - 1)][e] == "T"
-            power = power + 10
+
+          if grid[(p1.y - 1)][p1.x] == "T"
+            p1.power = p1.power + 10
           end
 
-          if grid[(d - 1)][e] == "W"
-            health = health - power
-            grid[rand(1..(a - 2))][rand(1..(b - 2))] = "W"
+          if grid[(p1.y - 1)][p1.x] == "W"
+            e1.health = e1.health - p1.power
+            grid[rand(1..(width - 2))][rand(1..(height - 2))] = "W"
           end
 
-          grid[d][e] = " "
-          d = d - 1
-          grid[d][e] = "O"
+          grid[p1.x][p1.y] = " "
+          p1.move(0,-1)
+          grid[p1.x][p1.y] = "O"
           system "clear"
+
         end
+
+      # Going Left
+      elsif movePlayer == "a"
+      # Going Down
+      elsif movePlayer == "s"
+      # Going Right
+      elsif movePlayer == "d"
+
       else
         system "clear"
         puts "Wrong move"
       end
 
       # Print grid
-      for w in 0..(a - 1)
-        for v in 0..(b - 1)
+      for w in 0..(width - 1)
+        for v in 0..(height - 1)
           print grid[w][v]
         end
 
@@ -217,23 +195,23 @@ if a.to_i.to_s == a && b.to_i.to_s == b
       end
 
       puts "Level #{level}"
-      puts "Your power is #{power}"
+      puts "Your p1.power is #{p1.power}"
 
-      if health <= 0
+      if e1.health <= 0
         system "clear"
         level = level + 1
-        health = 100 + (level * 15)
-        power = 0
+        e1.health = 100 + (level * 15)
+        p1.power = 0
         c = c * 1.5
         puts "You've won! The next level is Level: #{level}"
-        puts "Enemy health is #{health}"
+        puts "Enemy health is #{e1.health}"
         puts "Level #{level}"
-        puts "Your power is #{power}"
+        puts "Your power is #{p1.power}"
         puts p1.x, p1.y
 
         break
       else
-        puts "Enemy health is #{health}"
+        puts "Enemy health is #{e1.health}"
       end
     end
   end
