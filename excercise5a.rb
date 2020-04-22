@@ -131,6 +131,30 @@ class Game
       @maze.player.move(-1, 0)
     elsif input == "d"
       @maze.player.move(1, 0)
+    elsif input == "p"
+        def this(file)
+            file.puts("Level: " + @level.to_s)
+            file.puts("Health: #{@maze.player.health}")
+            file.puts("Power: #{@maze.player.power}")
+            file.puts("Enemy health: #{@maze.enemy1.health}")
+            file.puts("Status: " + @status)
+            for row in @maze.grid
+                for column in row
+                    # floor
+                    if column.nil?
+                    file.print(" ")
+                    else
+                    file.print(column.char)
+                    end
+                end
+            
+                file.puts("")
+            end
+        end 
+        
+        file = File.open('game.rb','w')
+        this(file)
+        file.close()
     else
       @status = "Unknown action, nothing happens."
     end
